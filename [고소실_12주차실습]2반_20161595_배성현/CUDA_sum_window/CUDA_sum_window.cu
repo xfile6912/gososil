@@ -147,12 +147,10 @@ __global__ void Sum_n_elements_Kernel_shared(IN int *d_ArrayElements, OUT int *d
 	}
 	shared_buffer[thread_id + Nf] = d_ArrayElements[id];
 	__syncthreads();
-	int sum = 0;
 	for (i = 0; i <= 2*Nf; i++)
 	{
-		sum += shared_buffer[thread_id + i];
+		d_SumOfArrayElements[id] += shared_buffer[thread_id + i];
 	}
-	d_SumOfArrayElements[id] = sum;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
